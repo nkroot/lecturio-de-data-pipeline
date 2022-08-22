@@ -50,9 +50,9 @@ docker-compose up -d --force-recreate
 - Languages and Kernels
 
 | Spark | Hadoop | Python | [Python Kernel](https://ipython.org/) |
-| ----- | ------ | ------- | ---------------------------------- | ------ | ------------------------------------- |
-| 3.1.3   | 3.2    | 3.7.3  | 7.19.0                                 |
-| 2.x   | 2.7    | 3.7.3  | 7.19.0                                 |
+| ----- | ------ | -------| ----------------------------------    | 
+| 3.1.3 | 3.2    | 3.7.3  | 7.19.0                                |
+| 2.x   | 2.7    | 3.7.3  | 7.19.0                                |
 
 - Apps
 
@@ -83,13 +83,11 @@ session = SparkSession\
                         .appName("Data retrival from parquet")\
                         .master("spark://spark-master:7077")\
                         .config("spark.executor.memory", "1G")\
-                        .enableHiveSupport()\
-                        .config("hive.default.fileformat","parquet") \
                         .getOrCreate()
+                        
 spark = session.newSession()
 
 spark.sparkContext.setLogLevel('WARN') 
-spark.conf.set("hive.default.fileformat","parquet")
 
 spark.sql("set spark.sql.legacy.timeParserPolicy=LEGACY")
 
